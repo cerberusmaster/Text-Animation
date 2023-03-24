@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    svg.svgwave {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    .wave {
+        animation: wave 4s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+        transform: translate3d(0, 0, 0);
+        width: 200%;
+    }
+
+    svg.svgwave path.first {
+        fill: transparent;
+        stroke: white;
+        stroke-width: 1px;
+    }
+
+    svg.svgwave path.second {
+        fill: transparent;
+        stroke: white;
+        stroke-width: 1px;
+    }
+
+    svg.svgwave text {
+        font-size: 80px;
+        fill: black;
+    }
+
+    @keyframes wave {
+        0% {
+            margin-left: -100%;
+        }
+
+        100% {
+            margin-left: 0%;
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/MotionPathPlugin.min.js"></script>
+
+<script>
+    function setCenter() {
+        const section1Height = document.getElementById("section1").clientHeight
+        const waveHeight = document.getElementById("wave").clientHeight
+        document.getElementById("section3").style.top = `${section1Height - waveHeight / 2}px`
+    }
+    function reportWindowSize() {
+        setCenter()
+    }
+    document.onscroll = () => {
+        // document.getElementById("wavetext").setAttribute('dur', `${40 - window.scrollY / 20}s`)
+    }
+    window.addEventListener("resize", reportWindowSize)
+    window.onload = () => {
+        document.getElementById("section3").innerHTML = `<svg id="wave" class="svgwave" width="3202" height="183" viewBox="0 0 3202 183" fill="none" xmlns="http://www.w3.org/2000/svg">\
+            <path d="M1 44.0115C1 44.0115 364.488 -50.9654 801.244 44.0115C1238 138.988 1601.49 44.0115 1601.49 44.0115C1601.49 44.0115 1965.01 -52.7644 2401.24 44.0115C2837.47 140.787 3201 44.0115 3201 44.0115V175.988C3201 175.988 2837.47 272.764 2401.24 175.988C1965.01 79.2126 1601.49 175.988 1601.49 175.988C1601.49 175.988 1237.74 272.764 801.244 175.988C364.747 79.2126 1 175.988 1 175.988V44.0115Z" fill="white" stroke="#CF2E2E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>\
+        </svg>\
+        <!-- wave line for text on -->\
+        <svg class="svgwave" width="3202" height="88" viewBox="0 0 3202 88" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: translateY(-120%);">\
+            <path lass="second" id="wavepath" d="M1 44C1 44 364.747 -52.75 801.244 44C1237.74 140.75 1601.49 44 1601.49 44C1601.49 44 1965.01 -52.75 2401.24 44C2837.47 140.75 3201 44 3201 44" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>\
+            <text text-anchor="start" id="text">\
+                <textPath class="my-text" href="#wavepath" startOffset="0" fill="#666666" style="font-size: 56px;">\
+                    REHABILITATION - PHYSIOTHERAPIE - MEDIZINISCHES\
+                    <animate id="wavetext" attributeName="startOffset" values="1601;3202" dur="4s" repeatCount="indefinite"></animate>\
+                </textPath>\
+            </text>\
+            <text text-anchor="start" id="text">\
+                <textPath class="my-text" href="#wavepath" startOffset="0" fill="#666666" style="font-size: 56px;">\
+                    REHABILITATION - PHYSIOTHERAPIE - MEDIZINISCHES\
+                    <animate id="wavetext" attributeName="startOffset" values="0;1601" begin="0s" dur="4s" repeatCount="indefinite"></animate>\
+                </textPath>\
+            </text>\
+            <text text-anchor="start" id="text">\
+                <textPath class="my-text" href="#wavepath" startOffset="0" fill="#666666" style="font-size: 56px;">\
+                    REHABILITATION - PHYSIOTHERAPIE - MEDIZINISCHES\
+                    <animate id="wavetext" attributeName="startOffset" values="-1600;0" begin="0s" dur="4s" repeatCount="indefinite"></animate>\
+                </textPath>\
+            </text>\
+        </svg>`
+        setCenter()
+    }
+    gsap.defaults({
+        ease: "none",
+        duration: 1
+    });
+
+    const tl = gsap.timeline({ paused: true });
+    tl.to("#text", {
+        motionPath: {
+            path: "#wavepath",
+            align: "#wavepath",
+            alignOrigin: [0.5, 1.1],
+            autoRotate: true
+        }
+    });
+    tl.from("#text", { drawSVG: 0 }, 0);
+
+    tl.progress(1).progress(0);
+    gsap.set("#text", { autoAlpha: 1 });
+
+    function doCoolStuff() {
+        if (prog < 1) {
+            prog += 0.2;
+            gsap.to(tl, { progress: prog });
+        }
+    }
+
+    // gsap.registerPlugin(ScrollTrigger);
+
+    // gsap.to("#text", {
+    //     attr: {
+    //         startOffset: 0
+    //     },
+    //     scrollTrigger: {
+    //         start: 0,
+    //         end: 500,
+    //         scrub: 2
+    //     }
+    // });
+                // REHABILITATION - PHYSIOTHERAPIE - MEDIZINISCHES AUFBAUTRAINING - ERGOTHERAPIE - PRAVENTION - REHABILITATION - PHYSIOTHERAPIE - MEDIZINISCHES AUFBAUTRAINING - ERGOTHERAPIE - PRAVENTION\
+</script>
+
+<body id="main" style="padding: 0px;margin: 0px;height: 100%;">
+    <div style="height: 100%;">
+        <div id="section1" style="width: 100%;height: 50%;background-color: #CF2E2E;"></div>
+        <div id="section3" style="position: absolute;width: 200%;" class="wave"></div>
+        <div id="section2" style="width: 100%;height: 50%;"></div>
+    </div>
+</body>
+
+</html>

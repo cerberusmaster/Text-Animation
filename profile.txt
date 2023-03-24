@@ -1,0 +1,19 @@
+https://greensock.com/
+
+[Text Animation on a path]
+https://oxygen4fun.supadezign.com/tutorials/how-to-animate-a-text-along-a-path/
+https://jonitrythall.com/svg-text-along-a-path
+https://greensock.com/motionpath/
+https://greensock.com/drawsvg/
+https://www.w3schools.com/tryit/tryit.asp?filename=tryhtml_hello
+
+[scroll GSAP]
+https://preview.webflow.com/preview/gsap-motionpath?utm_medium=preview_link&utm_source=showcase&utm_content=gsap-motionpath&preview=3c379c22c75a1399b4b82b1d5fd5bc97
+
+[webflow]
+https://university.webflow.com/lesson
+
+[3/5]
+fix svg
+flowing text > fix blinking
+GSAP Scroll -> speed
